@@ -16,7 +16,7 @@ services:
     environment:
       #all values here are default
       - REDIS_HOST=redis
-      #redis port taken from https://redis.io/docs/getting-started/install-stack/docker/
+      #redis port taken from https://redis.io/docs/getting-started/install-stack/docker/   dss
       - REDIS_PORT=6379
       - PGUSER=postgres
       - PGHOST=postgres
