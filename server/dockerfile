@@ -1,0 +1,22 @@
+FROM node:16-alpine
+
+#setting up user
+USER node
+
+# creating directory
+RUN mkdir -p /home/node/app
+
+#SETTING DIRECTORY AS THE CONTEXT IN THE CONTAINER FROM HERE ON
+WORKDIR /home/node/app
+
+#COPYING THE PACKAGE.JSON FILE SINCE ITS IS THE ONE WITH THE DEPENDENCIES
+COPY --chown=node:node ./package.json ./
+
+#DOWNLOAD ALL DEPENDENCIES
+RUN  npm install
+
+#COPY THE REST OF THE SYSTEM
+COPY --chown=node:node ./ ./
+
+#RUN APP
+CMD ["npm", "run", "start"]
