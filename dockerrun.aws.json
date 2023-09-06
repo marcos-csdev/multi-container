@@ -1,0 +1,37 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "_comment": "each entry in the following array represents an image at dockerhub and will instanciate a container on AWS",
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "makcsdev/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "makcsdev/multi-server",
+      "_comment": "the host below takes from the default.conf file in the server folder",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "makcsdev/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "makcsdev/multi-nginx",
+      "essential": true,
+      "portmappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
